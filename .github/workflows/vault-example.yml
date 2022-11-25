@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
 
       - name: Pull Keys from Vault
-        uses: hashicorp/vault-action@v2.4.0
+        uses: hashicorp/vault-action@v2.4.3
         with:
           url: https://a9f2-2601-645-8100-cc60-fd54-707e-a61a-390a.ngrok.io
           role: myproject-production
