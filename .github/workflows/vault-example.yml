@@ -1,0 +1,34 @@
+name: build
+on:
+  push:
+    branches: 
+      - '**'
+  pull_request:
+    branches: [ $default-branch ]
+  workflow_call:
+jobs:
+  build:
+    name: Pull from Vault
+    runs-on: ubuntu
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Pull Keys from Vault
+        uses: hashicorp/vault-action@v2.4.0
+        with:
+          url: https://a9f2-2601-645-8100-cc60-fd54-707e-a61a-390a.ngrok.io
+          role: trivy-scanner-role
+          method: jwt
+          path: jwt
+          secrets: |
+              secret/data/production test | testval ;
+
+      - name: Test
+        run: |
+          echo ${{ env.testval }}
