@@ -27,7 +27,7 @@ jobs:
           method: jwt
           path: jwt
           secrets: |
-              secret/data/production test | testval ;
+              secret/production test | testval ;
 
       - name: Test
         run: |
